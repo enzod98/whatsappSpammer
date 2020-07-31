@@ -1,17 +1,23 @@
+require('./config/config');
+
 const { Client } = require('whatsapp-web.js');
-const client = require('../controllers/acciones');
+const client = require('../bot/acciones');
 
 const mongoose = require('mongoose');
+
+const bodyParser = require('body-parser');
 
 mongoose.set('useFindAndModify', false);
 
 const express = require('express');
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(require('../controllers/uploads'));
+app.use(require('../controllers/indexControllers'));
 
-mongoose.connect('mongodb://localhost:27017/persona', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err, res) => {
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err, res) => {
     if (err) throw err
     else {
         console.log('Conexión exitosa a BD');
@@ -19,8 +25,8 @@ mongoose.connect('mongodb://localhost:27017/persona', { useNewUrlParser: true, u
 
 });
 
-app.listen(3000, () => {
-    console.log('Escuchando peticiones en el puerto: ', 3000);
+app.listen(process.env.PORT, () => {
+    console.log('Escuchando peticiones en el puerto: ', process.env.PORT);
 })
 
-client.initialize();
+//client.initialize();

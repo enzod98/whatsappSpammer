@@ -12,7 +12,7 @@ const personaSchema = new Schema({
         type: String,
         required: [true, 'El numero es obligatorio'],
         unique: true,
-        min: 10
+        minlength: 10
         
     },
     enviado : {

@@ -2,16 +2,14 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
 
-const bodyParser = require('body-parser')
-
 const Persona = require('../models/personas');
 
-app.use(bodyParser.json());
+const verificarToken = require('../middlewares/autenticacion');
 
 // default options
 app.use(fileUpload({ useTempFiles: true }));
 
-app.post('/uploads', (req, res) => {
+app.post('/uploads', verificarToken, (req, res) => {
     let body = req.body;
 
     let numeroIngresado = parseInt(body.numero, 10);
