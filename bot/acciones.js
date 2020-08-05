@@ -40,10 +40,7 @@ function spammer() {
         .limit(1)
         .exec(async (error, persona) => {
             if (error) {
-                return res.status(400).json({
-                    ok: false,
-                    error
-                })
+                return console.log('No se pudo ejecutar la búsqueda de personas, verifique la BD');
             }
 
             if(persona.length <= 0){
