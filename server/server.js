@@ -1,4 +1,5 @@
-require('./config/config');
+//require('./config/config');
+require('dotenv').config()
 
 const { Client } = require('whatsapp-web.js');
 const client = require('../bot/acciones');
